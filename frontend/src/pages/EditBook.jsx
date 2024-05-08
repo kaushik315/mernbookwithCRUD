@@ -29,15 +29,13 @@ const EditBook = () => {
                 console.log(error)
             });
     }, [])
-    const handleEditBook = () => {
-        const data = {
-            title,
-            author,
-            publishYear
-        };
+    const handleEditBook = async() => {
         setLoading(true)
-        axios
-            .put(`http://localhost:5555/books/${id}`, data)
+      await axios.put(`https://mernbookwithcrud.onrender.com/books/${id}`, {
+                title,
+                author,
+                publishYear
+            })
             .then(() => {
                 setLoading(false);
                 alert('Book edited successfully')
@@ -45,6 +43,7 @@ const EditBook = () => {
                 navigate('/');
             })
             .catch((error) => {
+                console.log(error);
                 setLoading(false);
                 // enqueueSnackBar('Error', {variant: 'error'})
                 console.log(error)
